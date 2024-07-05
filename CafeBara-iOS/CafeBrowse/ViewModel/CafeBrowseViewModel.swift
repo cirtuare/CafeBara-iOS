@@ -52,4 +52,15 @@ final class CafeBrowseViewModel {
 
     ]
     
+    var updateCafeData: (([CafeInfoModel]) -> Void)?
+        
+    func loadAllCafes() {
+        updateCafeData?(cafeBrowseDummyData)
+    }
+    
+    func filterCafes(by category: String) {
+        let filteredData = cafeBrowseDummyData.filter { $0.category == category }
+        updateCafeData?(filteredData)
+    }
+    
 }

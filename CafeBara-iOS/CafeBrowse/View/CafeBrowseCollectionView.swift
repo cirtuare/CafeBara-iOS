@@ -15,16 +15,20 @@ final class CafeBrowseCollectionView: UICollectionView {
     
     static var cafeBrowseCollectionViewLayout = UICollectionViewFlowLayout()
     
+    
     // MARK: - Properties
     
-    private var cafeInfoData: [CafeInfoModel] = []
-    
+    private var cafeInfoData: [CafeInfoModel] = [] {
+        didSet {
+            self.reloadData()
+        }
+    }
     // MARK: - LifeCycle
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         let flowLayout = CafeBrowseCollectionView.cafeBrowseCollectionViewLayout
         super.init(frame: frame, collectionViewLayout: flowLayout)
-        self.backgroundColor = .black
+        self.backgroundColor = UIColor(resource: .darkGray)
         register()
         setDelegate()
         setStyle()
@@ -35,12 +39,15 @@ final class CafeBrowseCollectionView: UICollectionView {
     }
     
     func setStyle() {
-        self.backgroundColor = .white
         
         CafeBrowseCollectionView.cafeBrowseCollectionViewLayout.do {
             $0.scrollDirection = .vertical
             $0.minimumLineSpacing = 0
         }
+    }
+    
+    func setUpBindings(cafeInfoData : [CafeInfoModel]) {
+        self.cafeInfoData = cafeInfoData
     }
 
 }
@@ -57,17 +64,14 @@ extension CafeBrowseCollectionView {
         self.delegate = self
         self.dataSource = self
     }
-
-    func setUpBindings(cafeInfoData : [CafeInfoModel]) {
-        self.cafeInfoData = cafeInfoData
-    }
+    
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 
 extension CafeBrowseCollectionView : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width / 2) - 24, height: 260)
+        return CGSize(width: (UIScreen.main.bounds.width / 2) - 24, height: 240)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -75,7 +79,7 @@ extension CafeBrowseCollectionView : UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        return UIEdgeInsets(top: 4, left: 16, bottom: 0, right: 16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

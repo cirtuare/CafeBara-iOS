@@ -13,6 +13,7 @@ import Then
 class CafeBrowseCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Properties
+    private var cellContentView = UIView()
     
     private var imageView = UIImageView()
     
@@ -56,7 +57,9 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
     }
     
     private func setHierarchy() {
-        self.addSubviews(imageView,
+        self.addSubviews(cellContentView)
+        
+        self.contentView.addSubviews(imageView,
                          nameLabel,
                           categoryLabel,
                           timeButton,
@@ -70,10 +73,9 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
     }
     
     private func setLayout() {
-        self.clipsToBounds = true
-        self.layer.cornerRadius = 20
-        self.layer.maskedCorners = CACornerMask([.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
-        self.backgroundColor = .systemPink
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -82,7 +84,7 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
         }
         
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(4)
+            $0.top.equalTo(imageView.snp.bottom).offset(8)
             $0.leading.equalToSuperview().inset(8)
             $0.trailing.equalToSuperview().inset(40)
             $0.height.equalTo(40)
@@ -128,26 +130,31 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
         }
         
         congestionImageView.snp.makeConstraints {
-            $0.top.equalTo(timeButton.snp.bottom).offset(10)
+            $0.top.equalTo(imageView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(5)
         }
         
+        /*
         congestionLabel.snp.makeConstraints {
             $0.top.equalTo(congestionImageView.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
-        }
+        }*/
         
     }
     
     private func setStyle() {
-        self.backgroundColor = UIColor(resource: .backgroundGray)
+        self.layer.shadowColor = UIColor.systemGray.cgColor
+        self.layer.shadowOpacity = 0.5
+        self.layer.shadowRadius = 3
+
+        self.contentView.layer.cornerRadius = 15
+        self.contentView.layer.masksToBounds = true
         
-        imageView.do {
-            $0.backgroundColor = .blue
+        contentView.do {
+            $0.backgroundColor = UIColor(resource: .backgroundGray)
         }
-        
         nameLabel.do {
             $0.textColor = UIColor.black
             $0.font = UIFont.boldSystemFont(ofSize: 15)
@@ -234,13 +241,13 @@ extension CafeBrowseCollectionViewCell {
     
     func setStatusBar(congestion: Int) {
         if congestion <= 33 {
-            congestionLabel.text = "여유"
+            // congestionLabel.text = "여유"
             congestionImageView.image = UIImage(resource: .greenBar)
         } else if 33 < congestion && congestion <= 66 {
-            congestionLabel.text = "보통"
+            // congestionLabel.text = "보통"
             congestionImageView.image = UIImage(resource: .yellowBar)
         } else {
-            congestionLabel.text = "혼잡"
+            // congestionLabel.text = "혼잡"
             congestionImageView.image = UIImage(resource: .redBar)
         }
     }

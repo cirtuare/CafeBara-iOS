@@ -14,6 +14,13 @@ extension UIButton {
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
+
+    func setDefaultButton() {
+        self.layer.borderColor = UIColor.systemGray.cgColor
+        self.layer.borderWidth = 1
+        self.backgroundColor = UIColor(resource: .backgroundGray)
+        self.setTitleColor(UIColor(resource: .deepGreen), for: .normal)
+    }
     
 }
 
