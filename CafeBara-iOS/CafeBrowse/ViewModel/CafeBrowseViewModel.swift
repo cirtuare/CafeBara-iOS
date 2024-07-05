@@ -49,6 +49,8 @@ final class CafeBrowseViewModel {
         CafeInfoModel(thumbnail: "낙대19", name: "가온길 서울대입구역점", link: "https://naver.me/5U1vtMO7", category: "# 감성 있는", time: "10시 이후 마감", americanoPrice: 3800, congestion: 28, distance: 485, wifi: true, concent: true),
 
         CafeInfoModel(thumbnail: "낙대20", name: "라우더 커피바", link: "https://naver.me/GgehFyO2", category: "# 감성 있는", time: "10시 이전 마감", americanoPrice: 4800, congestion: 75, distance: 465, wifi: true, concent: true),
+        
+        CafeInfoModel(thumbnail: "봉천4", name: "빽다방 관악구청점", link: "https://naver.me/x0aujq1F", category: "# 가성비 있는", time: "10시 이전 마감", americanoPrice: 2300, congestion: 1, distance: 204, wifi: true, concent: true),
 
     ]
     
