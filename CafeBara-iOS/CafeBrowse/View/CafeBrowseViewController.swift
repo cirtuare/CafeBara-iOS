@@ -119,7 +119,7 @@ class CafeBrowseViewController: UIViewController {
         cafeBrowseCollectionView.snp.makeConstraints {
             $0.top.equalTo(filterView.snp.bottom).offset(20)
             $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(90)
         }
     }
     

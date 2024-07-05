@@ -13,6 +13,7 @@
 		741624C32C37DE6F0084AB54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741624C12C37DE6F0084AB54 /* Main.storyboard */; };
 		741624C52C37DE720084AB54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 741624C42C37DE720084AB54 /* Assets.xcassets */; };
 		741624C82C37DE720084AB54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 741624C62C37DE720084AB54 /* LaunchScreen.storyboard */; };
+		745887A62C38799800CA1375 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745887A52C38799800CA1375 /* EmptyViewController.swift */; };
 		74D1251C2C37E2A80059F9A2 /* CafeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1251B2C37E2A80059F9A2 /* CafeInfoModel.swift */; };
 		74D1251E2C37E2E10059F9A2 /* CafeBrowseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1251D2C37E2E10059F9A2 /* CafeBrowseViewModel.swift */; };
 		74D125212C37E30B0059F9A2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 74D125202C37E30B0059F9A2 /* SnapKit */; };
@@ -22,6 +23,7 @@
 		74D1252B2C37E5340059F9A2 /* CafeBrowseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1252A2C37E5340059F9A2 /* CafeBrowseCollectionView.swift */; };
 		74D1252E2C37ECF10059F9A2 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D1252D2C37ECF10059F9A2 /* UIView+.swift */; };
 		74D125322C38038E0059F9A2 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D125312C38038E0059F9A2 /* UIButton+.swift */; };
+		74D125352C38756B0059F9A2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D125342C38756B0059F9A2 /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,12 +35,14 @@
 		741624C42C37DE720084AB54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		741624C72C37DE720084AB54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		741624C92C37DE720084AB54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		745887A52C38799800CA1375 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		74D1251B2C37E2A80059F9A2 /* CafeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeInfoModel.swift; sourceTree = "<group>"; };
 		74D1251D2C37E2E10059F9A2 /* CafeBrowseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeBrowseViewModel.swift; sourceTree = "<group>"; };
 		74D125272C37E5190059F9A2 /* CafeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeCollectionViewCell.swift; sourceTree = "<group>"; };
 		74D1252A2C37E5340059F9A2 /* CafeBrowseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeBrowseCollectionView.swift; sourceTree = "<group>"; };
 		74D1252D2C37ECF10059F9A2 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		74D125312C38038E0059F9A2 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		74D125342C38756B0059F9A2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 		741624BA2C37DE6F0084AB54 /* CafeBara-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				74D125332C3875560059F9A2 /* Global */,
 				74D1252C2C37ECDF0059F9A2 /* Extensions */,
 				74D125162C37E1560059F9A2 /* CafeBrowse */,
 				741624BB2C37DE6F0084AB54 /* AppDelegate.swift */,
@@ -137,6 +142,15 @@
 				74D125312C38038E0059F9A2 /* UIButton+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		74D125332C3875560059F9A2 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				74D125342C38756B0059F9A2 /* TabBarController.swift */,
+				745887A52C38799800CA1375 /* EmptyViewController.swift */,
+			);
+			path = Global;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +237,12 @@
 				74D125282C37E5190059F9A2 /* CafeCollectionViewCell.swift in Sources */,
 				741624C02C37DE6F0084AB54 /* CafeBrowseViewController.swift in Sources */,
 				741624BC2C37DE6F0084AB54 /* AppDelegate.swift in Sources */,
+				745887A62C38799800CA1375 /* EmptyViewController.swift in Sources */,
 				74D125322C38038E0059F9A2 /* UIButton+.swift in Sources */,
 				74D1252E2C37ECF10059F9A2 /* UIView+.swift in Sources */,
 				74D1251C2C37E2A80059F9A2 /* CafeInfoModel.swift in Sources */,
 				74D1252B2C37E5340059F9A2 /* CafeBrowseCollectionView.swift in Sources */,
+				74D125352C38756B0059F9A2 /* TabBarController.swift in Sources */,
 				741624BE2C37DE6F0084AB54 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
