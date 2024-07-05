@@ -1,0 +1,87 @@
+//
+//  CafeBrowseCollectionView.swift
+//  CafeBara-iOS
+//
+//  Created by 이수민 on 7/5/24.
+//
+
+import UIKit
+
+import Then
+
+final class CafeBrowseCollectionView: UICollectionView {
+    
+    // MARK: - UI Properties
+    
+    static var cafeBrowseCollectionViewLayout = UICollectionViewFlowLayout()
+    
+    // MARK: - Properties
+    
+    private var cafeInfoData: [CafeInfoModel] = []
+    
+    // MARK: - LifeCycle
+    
+    override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+        let flowLayout = CafeBrowseCollectionView.cafeBrowseCollectionViewLayout
+        super.init(frame: frame, collectionViewLayout: flowLayout)
+        self.backgroundColor = .black
+        register()
+        setDelegate()
+        setStyle()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setStyle() {
+        self.backgroundColor = .white
+        
+        CafeBrowseCollectionView.cafeBrowseCollectionViewLayout.do {
+            $0.scrollDirection = .vertical
+            $0.minimumLineSpacing = 0
+        }
+    }
+
+}
+
+
+// MARK: - CollectionView Methods
+
+extension CafeBrowseCollectionView {
+    private func register() {
+        self.register(CafeBrowseCollectionViewCell.self, forCellWithReuseIdentifier: "CafeBrowseCollectionViewCell")
+    }
+    
+    private func setDelegate() {
+        self.delegate = self
+        self.dataSource = self
+    }
+
+    func setUpBindings(cafeInfoData : [CafeInfoModel]) {
+        self.cafeInfoData = cafeInfoData
+    }
+}
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension CafeBrowseCollectionView : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 86)
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+
+extension CafeBrowseCollectionView : UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return cafeInfoData.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CafeBrowseCollectionViewCell", for: indexPath) as? CafeBrowseCollectionViewCell else { return UICollectionViewCell() }
+        cell.dataBind(cafeInfoData[indexPath.item], indexPath.item)
+        return cell
+    }
+}
