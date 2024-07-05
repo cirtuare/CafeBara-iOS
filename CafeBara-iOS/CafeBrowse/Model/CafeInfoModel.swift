@@ -5,9 +5,10 @@
 //  Created by 이수민 on 7/5/24.
 //
 
-import Foundation
+import UIKit
 
 struct CafeInfoModel {
+    let thumbnail: String?
     let name: String?
     let link: String?
     let category: String?
@@ -18,7 +19,8 @@ struct CafeInfoModel {
     let wifi: Bool?
     let concent: Bool?
     
-    init(name: String?, link: String?, category: String?, time: String?, americanoPrice: Int?, congestion: Int?, distance: Int?, wifi: Bool?, concent: Bool?) {
+    init(thumbnail: String?, name: String?, link: String?, category: String?, time: String?, americanoPrice: Int?, congestion: Int?, distance: Int?, wifi: Bool?, concent: Bool?) {
+        self.thumbnail = thumbnail
         self.name = name
         self.link = link
         self.category = category

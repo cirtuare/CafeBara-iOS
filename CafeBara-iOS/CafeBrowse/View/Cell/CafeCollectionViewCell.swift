@@ -14,9 +14,11 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
     
     // MARK: - UI Properties
     
+    private var imageView = UIImageView()
+    
     private var nameLabel = UILabel()
     
-    private var linkLabel = UILabel()
+    private var distanceLabel = UILabel()
     
     private var categoryLabel = UILabel()
     
@@ -24,18 +26,19 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
     
     private var americanoPriceButton = UIButton()
     
-    private var congestionButton = UIButton()
-    
-    private var distanceButton = UIButton()
-    
     private var wifiButton = UIButton()
     
     private var concentButton = UIButton()
     
+    private var congestionImageView = UIImageView()
+    
+    private var congestionLabel = UILabel()
+    
+    
     // MARK: - Properties
     
     var cafeItemRow: Int?
-    
+    var cafeURL: String?
     let cellIdentifier = "CafeBrowseCollectionViewCell"
     
     // MARK: - LifeCycle
@@ -53,119 +56,159 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
     }
     
     private func setHierarchy() {
-        self.addSubviews(nameLabel,
-                              linkLabel,
-                              categoryLabel,
-                              timeButton,
-                              americanoPriceButton,
-                              congestionButton,
-                              distanceButton,
-                              wifiButton,
-                              concentButton)
+        self.addSubviews(imageView,
+                         nameLabel,
+                          categoryLabel,
+                          timeButton,
+                          americanoPriceButton,
+                          congestionImageView,
+                         congestionLabel,
+                          distanceLabel,
+                          wifiButton,
+                          concentButton)
+        
     }
     
     private func setLayout() {
-        nameLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
+        self.clipsToBounds = true
+        self.layer.cornerRadius = 20
+        self.layer.maskedCorners = CACornerMask([.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+        self.backgroundColor = .systemPink
+        
+        imageView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo((UIScreen.main.bounds.width / 2) - 40)
         }
         
-        linkLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
+        nameLabel.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(4)
+            $0.leading.equalToSuperview().inset(8)
+            $0.trailing.equalToSuperview().inset(40)
+            $0.height.equalTo(40)
+        }
+        
+        distanceLabel.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.top)
+            $0.trailing.equalToSuperview().inset(8)
+            $0.height.equalTo(24)
         }
         
         categoryLabel.snp.makeConstraints {
-            $0.top.equalTo(linkLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
-        }
-        
-        timeButton.snp.makeConstraints {
-            $0.top.equalTo(categoryLabel.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
-        }
-        
-        americanoPriceButton.snp.makeConstraints {
-            $0.top.equalTo(timeButton.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
-        }
-        
-        congestionButton.snp.makeConstraints {
-            $0.top.equalTo(americanoPriceButton.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
-        }
-        
-        distanceButton.snp.makeConstraints {
-            $0.top.equalTo(congestionButton.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
+            $0.top.equalToSuperview().offset(10)
+            $0.trailing.equalToSuperview()
+            $0.width.equalTo(80)
+            $0.height.equalTo(20)
         }
         
         wifiButton.snp.makeConstraints {
-            $0.top.equalTo(distanceButton.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
+            $0.top.equalTo(distanceLabel.snp.bottom)
+            $0.height.width.equalTo(16)
+            $0.trailing.equalTo(concentButton.snp.leading)
         }
         
         concentButton.snp.makeConstraints {
-            $0.top.equalTo(wifiButton.snp.bottom).offset(10)
-            $0.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(21)
+            $0.top.equalTo(distanceLabel.snp.bottom)
+            $0.height.width.equalTo(16)
+            $0.trailing.equalToSuperview().inset(8)
         }
+    
+        americanoPriceButton.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(10)
+            $0.height.equalTo(16)
+            $0.leading.equalToSuperview().inset(8)
+            $0.width.equalTo(50)
+        }
+        
+        timeButton.snp.makeConstraints {
+            $0.top.equalTo(americanoPriceButton.snp.top)
+            $0.height.equalTo(americanoPriceButton.snp.height)
+            $0.leading.equalTo(americanoPriceButton.snp.trailing).offset(4)
+            $0.width.equalTo(90)
+        }
+        
+        congestionImageView.snp.makeConstraints {
+            $0.top.equalTo(timeButton.snp.bottom).offset(10)
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(5)
+        }
+        
+        congestionLabel.snp.makeConstraints {
+            $0.top.equalTo(congestionImageView.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+        
     }
     
     private func setStyle() {
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = UIColor(resource: .backgroundGray)
+        
+        imageView.do {
+            $0.backgroundColor = .blue
+        }
         
         nameLabel.do {
             $0.textColor = UIColor.black
             $0.font = UIFont.boldSystemFont(ofSize: 15)
+            $0.numberOfLines = 2
         }
         
-        linkLabel.do {
-            $0.textColor = UIColor.blue
-            $0.font = UIFont.systemFont(ofSize: 15)
+        distanceLabel.do {
+            $0.textColor = UIColor(resource: .deepGreen)
+            $0.font = UIFont.systemFont(ofSize: 10)
         }
         
         categoryLabel.do {
-            $0.textColor = UIColor.darkGray
-            $0.font = UIFont.systemFont(ofSize: 15)
+            $0.backgroundColor = UIColor(resource: .deepGreen)
+            $0.textColor = .white
+            $0.font = UIFont.boldSystemFont(ofSize: 10)
+            $0.textAlignment = .center
         }
         
         timeButton.do {
-            $0.setTitleColor(UIColor.gray, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            $0.setImage(UIImage(resource: .clockIcon), for: .normal)
+            $0.setTitleColor(UIColor.black, for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+            $0.backgroundColor = UIColor(resource: .lightGreen)
+            $0.roundedButton(cornerRadius: 8, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+            $0.contentEdgeInsets = UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5) // 버튼 내부 여백 설정
+            $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 70) // 이미지 위치 조정
+            $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 텍스트 위치 조정
+            $0.contentHorizontalAlignment = .right
         }
         
         americanoPriceButton.do {
-            $0.setTitleColor(UIColor.brown, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        }
-        
-        congestionButton.do {
-            $0.setTitleColor(UIColor.red, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        }
-        
-        distanceButton.do {
-            $0.setTitleColor(UIColor.green, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            $0.setImage(UIImage(resource: .coffeeIcon), for: .normal)
+            $0.setTitleColor(UIColor.black, for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+            $0.backgroundColor = UIColor(resource: .lightGreen)
+            $0.roundedButton(cornerRadius: 8, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+            $0.contentEdgeInsets = UIEdgeInsets(top: 3, left: 5, bottom: 3, right: 5) // 버튼 내부 여백 설정
+            $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 28) // 이미지 위치 조정
+            $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) // 텍스트 위치 조정
+            $0.contentHorizontalAlignment = .right
         }
         
         wifiButton.do {
-            $0.setTitleColor(UIColor.purple, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            $0.setImage(UIImage(resource: .wifiIcon), for: .normal)
+            $0.roundedButton(cornerRadius: 8, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+            $0.clipsToBounds = true
+            $0.imageView?.contentMode = .scaleAspectFit
         }
         
         concentButton.do {
-            $0.setTitleColor(UIColor.orange, for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            $0.setImage(UIImage(resource: .chargeIcon), for: .normal)
+            $0.roundedButton(cornerRadius: 8, maskedCorners: [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner])
+            $0.clipsToBounds = true
+            $0.imageView?.contentMode = .scaleAspectFit
+        }
+        
+        congestionLabel.do {
+            $0.backgroundColor = UIColor(resource: .deepGreen)
+            $0.font = UIFont.systemFont(ofSize: 10, weight: .bold)
+            $0.textColor = .white
+            $0.textAlignment = .center
         }
     }
 }
@@ -173,8 +216,9 @@ class CafeBrowseCollectionViewCell: UICollectionViewCell {
 extension CafeBrowseCollectionViewCell {
     func dataBind(_ cafeInfoData: CafeInfoModel, _ cafeItemRow: Int) {
         self.cafeItemRow = cafeItemRow
+        self.imageView.image = UIImage(named: cafeInfoData.thumbnail ?? "default")
         self.nameLabel.text = cafeInfoData.name
-        self.linkLabel.text = cafeInfoData.link
+        self.cafeURL = cafeInfoData.link ?? "https://naver.me/5Q4ojiSX"
         self.categoryLabel.text = cafeInfoData.category
         self.timeButton.setTitle(cafeInfoData.time, for: .normal)
         if let americanoPrice = cafeInfoData.americanoPrice {
@@ -182,17 +226,24 @@ extension CafeBrowseCollectionViewCell {
         } else {
             self.americanoPriceButton.setTitle("N/A", for: .normal)
         }
-        if let congestion = cafeInfoData.congestion {
-            self.congestionButton.setTitle("\(congestion)", for: .normal)
-        } else {
-            self.congestionButton.setTitle("N/A", for: .normal)
-        }
-        if let distance = cafeInfoData.distance {
-            self.distanceButton.setTitle("\(distance)", for: .normal)
-        } else {
-            self.distanceButton.setTitle("N/A", for: .normal)
-        }
-        self.wifiButton.setTitle(cafeInfoData.wifi == true ? "Available" : "Not Available", for: .normal)
-        self.concentButton.setTitle(cafeInfoData.concent == true ? "Available" : "Not Available", for: .normal)
+        setStatusBar(congestion: cafeInfoData.congestion ?? 50)
+        self.distanceLabel.text = "\(cafeInfoData.distance ?? 100) m"
+        // self.wifiButton.setTitle(cafeInfoData.wifi == true ? "Available" : "Not Available", for: .normal)
+        // self.concentButton.setTitle(cafeInfoData.concent == true ? "Available" : "Not Available", for: .normal)
     }
+    
+    func setStatusBar(congestion: Int) {
+        if congestion <= 33 {
+            congestionLabel.text = "여유"
+            congestionImageView.image = UIImage(resource: .greenBar)
+        } else if 33 < congestion && congestion <= 66 {
+            congestionLabel.text = "보통"
+            congestionImageView.image = UIImage(resource: .yellowBar)
+        } else {
+            congestionLabel.text = "혼잡"
+            congestionImageView.image = UIImage(resource: .redBar)
+        }
+    }
+    
+    
 }
