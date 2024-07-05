@@ -86,8 +86,10 @@ extension CafeBrowseCollectionView : UICollectionViewDelegateFlowLayout {
         return 16
     }
     
-    
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let urlString = cafeInfoData[indexPath.item].link, let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
